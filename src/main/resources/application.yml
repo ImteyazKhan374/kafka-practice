@@ -1,0 +1,35 @@
+server:
+  port: 9090  # Port for the Spring Boot application
+
+spring:
+  application:
+    name: spring-boot-kafka-example
+
+  kafka:
+    bootstrap-servers: localhost:9092  # Kafka broker running in Docker on the host
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      acks: all
+      retries: 3
+      properties:
+        enable.idempotence: true
+        max.block.ms: 60000
+
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: my-spring-boot-group
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      auto-commit-interval: 1000
+      properties:
+        max.poll.records: 500
+        session.timeout.ms: 45000
+        heartbeat.interval.ms: 10000
+
+    listener:
+      type: single
+      concurrency: 3
+      ack-mode: record

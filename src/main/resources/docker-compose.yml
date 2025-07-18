@@ -1,0 +1,65 @@
+services:
+  kafka:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: kafka
+    ports:
+      - "9092:9092"
+      - "9093:9093"
+    environment:
+      KAFKA_KRAFT_MODE: "true"
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: broker,controller
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: BROKER:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_LISTENERS: BROKER://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+      KAFKA_ADVERTISED_LISTENERS: BROKER://host.docker.internal:9092
+      KAFKA_INTER_BROKER_LISTENER_NAME: BROKER
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+      # --- Corrected CLUSTER_ID to Base64 format for confluentinc/cp-kafka image ---
+      CLUSTER_ID: "_6gy4M1CSDemWf1YOHfmcA" # Unique Base64 encoded UUID for your Kafka cluster
+      # -----------------------------------------------------------------------------
+    networks: # Assign to the custom network
+      - kafka-net
+
+  connect:
+    image: debezium/connect:2.5
+    ports:
+      - "8083:8083"
+    environment:
+      BOOTSTRAP_SERVERS: kafka:9092
+      GROUP_ID: 1
+      CONFIG_STORAGE_TOPIC: connect-configs
+      OFFSET_STORAGE_TOPIC: connect-offsets
+      STATUS_STORAGE_TOPIC: connect-status
+      KEY_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      VALUE_CONVERTER: org.apache.kafka.connect.json.JsonConverter
+      CONNECT_REST_ADVERTISED_HOST_NAME: connect
+      CONNECT_PLUGIN_PATH: /kafka/connect,/usr/share/java
+    depends_on:
+      - kafka
+    networks: # Assign to the custom network
+      - kafka-net
+
+  akhq:
+    image: tchiotludo/akhq:latest
+    container_name: akhq
+    ports:
+      - "8081:8080"
+    depends_on:
+      - kafka
+    restart: on-failure
+    environment:
+      AKHQ_CONFIGURATION: |
+        akhq:
+          connections:
+            kafka-cluster:
+              properties:
+                bootstrap.servers: "kafka:9092"
+    networks: # Assign to the custom network
+      - kafka-net
+
+networks: # Define the custom network
+  kafka-net:
+    name: my-kafka-network # Give it a specific name
