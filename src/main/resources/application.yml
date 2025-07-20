@@ -1,5 +1,5 @@
 server:
-  port: 9090  # Port for the Spring Boot application
+  port: 8087  # Port for the Spring Boot application
 
 spring:
   application:
