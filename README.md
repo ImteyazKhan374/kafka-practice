@@ -233,9 +233,3 @@ Content-Type: application/json
 * 🛠️ Connector payload included for easy MySQL CDC setup
 * 🐳 Full Docker Compose for Kafka ecosystem
 * 🧪 Verification steps to test your pipeline
-
-Let me know if you'd like to:
-
-* Add sample consumers
-* Auto-create topics or connectors
-* Use dockerized MySQL with init data
