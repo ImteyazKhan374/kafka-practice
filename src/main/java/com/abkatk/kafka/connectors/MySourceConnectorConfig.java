@@ -1,4 +1,4 @@
-package com.tcs.kafka.connectors;
+package com.abkatk.kafka.connectors;
 
 import org.apache.kafka.common.config.ConfigDef;
 

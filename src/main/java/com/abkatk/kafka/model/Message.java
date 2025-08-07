@@ -1,4 +1,4 @@
-package com.tcs.kafka.model;
+package com.abkatk.kafka.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

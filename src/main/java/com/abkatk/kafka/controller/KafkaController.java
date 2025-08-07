@@ -1,4 +1,4 @@
-package com.tcs.kafka.controller;
+package com.abkatk.kafka.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.tcs.kafka.service.KafkaProducerService;
+import com.abkatk.kafka.service.KafkaProducerService;
 
 @RestController
 @RequestMapping("/api/kafka")

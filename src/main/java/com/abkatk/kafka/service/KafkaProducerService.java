@@ -1,4 +1,4 @@
-package com.tcs.kafka.service;
+package com.abkatk.kafka.service;
 
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tcs.kafka.model.Message;
-import com.tcs.kafka.util.AppConstants;
+import com.abkatk.kafka.model.Message;
+import com.abkatk.kafka.util.AppConstants;
 
 @Service
 public class KafkaProducerService {

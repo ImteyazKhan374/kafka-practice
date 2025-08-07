@@ -1,4 +1,4 @@
-package com.tcs.kafka.util;
+package com.abkatk.kafka.util;
 
 public class AppConstants {
     public static final String TOPIC_NAME = "my-spring-boot-topic";

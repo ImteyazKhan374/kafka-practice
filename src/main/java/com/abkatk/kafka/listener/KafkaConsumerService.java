@@ -1,4 +1,4 @@
-package com.tcs.kafka.listener;
+package com.abkatk.kafka.listener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,8 +6,8 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tcs.kafka.model.Message;
-import com.tcs.kafka.util.AppConstants;
+import com.abkatk.kafka.model.Message;
+import com.abkatk.kafka.util.AppConstants;
 
 @Service
 public class KafkaConsumerService {

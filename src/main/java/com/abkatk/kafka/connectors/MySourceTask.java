@@ -1,4 +1,4 @@
-package com.tcs.kafka.connectors;
+package com.abkatk.kafka.connectors;
 
 import java.util.ArrayList;
 import java.util.Collections;
